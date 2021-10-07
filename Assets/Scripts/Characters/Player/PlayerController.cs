@@ -11,6 +11,7 @@ namespace Assets.Scripts.Characters.Player
 
         Camera cam;
         PlayerMotor motor;
+
         public Interactable focus;
         public GameObject gameMenu;
         private void Start()
@@ -25,9 +26,8 @@ namespace Assets.Scripts.Characters.Player
                 if (Input.GetMouseButtonDown(0))
                 {
                     Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-                    RaycastHit hit;
 
-                    if (Physics.Raycast(ray, out hit, 100, movementMask))
+                    if (Physics.Raycast(ray, out RaycastHit hit, 500, movementMask))
                     {
                         motor.MoveToPoint(hit.point);
                         Debug.Log($"'{transform.name}' moving to {hit.point}");
@@ -37,9 +37,8 @@ namespace Assets.Scripts.Characters.Player
             if (Input.GetMouseButtonDown(1))
             {
                 Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
 
-                if (Physics.Raycast(ray, out hit, 100))
+                if (Physics.Raycast(ray, out RaycastHit hit, 100))
                 {
                     Interactable interactable = hit.collider.GetComponent<Interactable>();
                     if (interactable != null)
@@ -48,7 +47,6 @@ namespace Assets.Scripts.Characters.Player
                     }
                 }
             }
-
         }
         public void SetFocus(Interactable newFocus)
         {

@@ -4,13 +4,21 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-    public GameObject interactableMenu;
+    InteractableMenu interactionMenu;
+    new public string name;
+    public string type;
+    private void Start()
+    {
+        interactionMenu = InteractableMenu.instance;
+    }
     public void OnFocus()
     {
-        interactableMenu.SetActive(true);
+        interactionMenu.gameObject.SetActive(true);
+        interactionMenu.SetNameAndType(this);
     }
     public void OnUnFocus()
     {
-        interactableMenu.SetActive(false);
+        interactionMenu.gameObject.SetActive(false);
+        interactionMenu.HideActions();
     }
 }
