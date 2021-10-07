@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 6363026}
   - component: {fileID: 6363025}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: View Actions Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -357,7 +357,7 @@ GameObject:
   - component: {fileID: 226959762}
   - component: {fileID: 226959761}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: View Information Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -745,7 +745,7 @@ GameObject:
   - component: {fileID: 705568191}
   - component: {fileID: 705568190}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Approach Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1392,7 +1392,7 @@ GameObject:
   - component: {fileID: 1294489811}
   - component: {fileID: 1294489810}
   m_Layer: 5
-  m_Name: Modifier
+  m_Name: Object Type
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1415,7 +1415,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -61}
-  m_SizeDelta: {x: 142.6973, y: 30}
+  m_SizeDelta: {x: 289.71, y: 30}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1294489810
 MonoBehaviour:
@@ -1450,7 +1450,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Interactable
+  m_Text: Sample
 --- !u!222 &1294489811
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1554,6 +1554,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMotor: {fileID: 890557290}
   playerController: {fileID: 890557289}
+  objectNameText: {fileID: 0}
+  objectTypeText: {fileID: 0}
 --- !u!1 &1376236159
 GameObject:
   m_ObjectHideFlags: 0
@@ -1589,7 +1591,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 35.9985, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1376236161
 MonoBehaviour:
@@ -2123,7 +2125,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 142.6973, y: 30}
+  m_SizeDelta: {x: 289.71, y: 30}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &2077875400
 MonoBehaviour:
@@ -2158,7 +2160,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Chest
+  m_Text: Object
 --- !u!222 &2077875401
 CanvasRenderer:
   m_ObjectHideFlags: 0
