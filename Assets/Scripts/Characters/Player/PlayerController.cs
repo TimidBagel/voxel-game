@@ -11,9 +11,15 @@ namespace Assets.Scripts.Characters.Player
 
         Camera cam;
         PlayerMotor motor;
+        InteractionMenu interactionMenu;
 
         public Interactable focus;
         public GameObject gameMenu;
+
+        private void Awake()
+        {
+            interactionMenu = InteractionMenu.instance;
+        }
         private void Start()
         {
             cam = Camera.main;
@@ -56,14 +62,16 @@ namespace Assets.Scripts.Characters.Player
                 return;
             }
             focus = newFocus;
-            focus.OnFocus();
+            focus.OnFocus(transform);
             Debug.Log($"Focus is now {focus.transform.name}");
+            motor.agent.stoppingDistance = focus.interactionRadius * .8f;
         }
         public void RemoveFocus()
         {
             focus.OnUnFocus();
             focus = null;
             Debug.Log("Focus removed");
+            motor.agent.stoppingDistance = 0;
         }
     }
 }
