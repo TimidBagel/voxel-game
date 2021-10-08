@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.45059067, g: 0.500568, b: 0.57503724, a: 1}
+  m_IndirectSpecularColor: {r: 0.4505905, g: 0.5005676, b: 0.5750366, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1617,7 +1617,7 @@ Transform:
   m_Children:
   - {fileID: 1793886935}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!195 &890557288
 NavMeshAgent:
@@ -1700,7 +1700,7 @@ Transform:
   m_Children:
   - {fileID: 67112663}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &973476188
 GameObject:
@@ -1731,12 +1731,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 973476188}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fe5c7d33f8f0a14496a3814890c88f9, type: 3}
+  m_Script: {fileID: 11500000, guid: b80720d4e6b65924796c402fd553b59d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Chest
-  type: Lootable
+  itemPickup: {fileID: 0}
+  objectInteraction: {fileID: 0}
+  canInteract: 0
   interactionRadius: 2.5
+  object_: {fileID: 11400000, guid: 538e4cbb8279dbb4d991312deadb9f0c, type: 2}
 --- !u!65 &973476190
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1769,7 +1771,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1172fcbc3b753c54ea65afc518684653, type: 2}
+  - {fileID: 2100000, guid: 7ac87e3a6eb3a8b4f87e86832e8ff333, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2039,7 +2041,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1227178201
 GameObject:
@@ -2350,8 +2352,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMotor: {fileID: 890557290}
-  playerController: {fileID: 890557289}
+  currentInteractable: {fileID: 0}
   currentObject: {fileID: 0}
+  currentItem: {fileID: 0}
+  playerController: {fileID: 890557289}
   additionalActionsPannel: {fileID: 1487787149}
   objectNameText: {fileID: 2077875400}
   objectTypeText: {fileID: 1294489810}
@@ -2474,7 +2478,7 @@ Transform:
   m_Children:
   - {fileID: 1141596370}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
 --- !u!114 &1386669068
 MonoBehaviour:
@@ -2909,7 +2913,7 @@ Transform:
   - {fileID: 710050395}
   - {fileID: 701415961}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1784778764
 GameObject:
@@ -2940,12 +2944,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1784778764}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e206a49455e13ab4d8e7ad83a60e0ec7, type: 3}
+  m_Script: {fileID: 11500000, guid: b80720d4e6b65924796c402fd553b59d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Block
-  type: Minable
+  itemPickup: {fileID: 0}
+  objectInteraction: {fileID: 0}
+  canInteract: 0
   interactionRadius: 2.5
+  object_: {fileID: 11400000, guid: dac10ebca14429049bb972af3875ccc4, type: 2}
 --- !u!65 &1784778766
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3116,6 +3122,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 710050395}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1793748237
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1793748239}
+  - component: {fileID: 1793748238}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1793748238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1793748237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef21b5f28990e554d878200168d9ff7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventorySpace: 20
+  items: []
+--- !u!4 &1793748239
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1793748237}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1622.3254, y: 446.36954, z: -37.3555}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1793886934
 GameObject:
@@ -3465,9 +3516,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ba8389d3a62f4d469ef924075c3c15b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Green Box
-  type: Item
+  itemPickup: {fileID: 0}
+  objectInteraction: {fileID: 0}
+  canInteract: 0
   interactionRadius: 2.5
+  item: {fileID: 11400000, guid: 82d00d647e08881478c47407cedad654, type: 2}
 --- !u!1 &1916312348
 GameObject:
   m_ObjectHideFlags: 0
@@ -3791,8 +3844,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e206a49455e13ab4d8e7ad83a60e0ec7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Test Character
-  type: Character
+  itemPickup: {fileID: 0}
+  objectInteraction: {fileID: 0}
+  canInteract: 0
   interactionRadius: 2.5
 --- !u!65 &2120046569
 BoxCollider:
@@ -3868,5 +3922,5 @@ Transform:
   m_LocalScale: {x: 1, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

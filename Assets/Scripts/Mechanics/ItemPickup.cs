@@ -5,14 +5,10 @@ public class ItemPickup : Interactable
     public Item item;
     public void Pickup()
     {
-        Debug.Log("Picking up an item");
-        Inventory.instance.Add(item);
-        if (Inventory.instance.Add){
-        Destroy(gameObject);
-        }
-        if (!Inventory.instance.Add){
-            Debug.Log("Failed to pickup" + item.name);
-        }
+        Debug.Log($"'{item.name}' was picked up");
+        bool wasPickedUp = Inventory.instance.Add(item);
+        if (wasPickedUp)
+            Destroy(gameObject);
     }
 }
  

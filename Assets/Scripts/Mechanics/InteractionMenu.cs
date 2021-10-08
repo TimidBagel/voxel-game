@@ -9,8 +9,10 @@ public class InteractionMenu : MonoBehaviour
     #region Variables
     [Header("Designations")]
     public PlayerMotor playerMotor;
+    public Interactable currentInteractable;
+    public ObjectInteraction currentObject;
+    public ItemPickup currentItem;
     public PlayerController playerController;
-    public Interactable currentObject;
     public GameObject additionalActionsPannel;
 
     [Header("Name Text")]
@@ -45,11 +47,22 @@ public class InteractionMenu : MonoBehaviour
     }
     #endregion
 
-    public void SetNameAndType(Interactable thing)
+    public void SetNameAndType(ObjectInteraction objectInteraction, ItemPickup itemPickup)
     {
-        currentObject = thing;
-        objectNameText.text = currentObject.name;
-        objectTypeText.text = currentObject.type;
+        if (objectInteraction != null)
+        {
+            currentObject = objectInteraction;
+
+            objectNameText.text = currentObject.object_.name;
+            objectTypeText.text = currentObject.object_.type;
+        }
+        if (itemPickup != null)
+        {
+            currentItem = itemPickup;
+
+            objectNameText.text = currentItem.item.name;
+            objectTypeText.text = currentItem.item.type;
+        }
     }
     public void Approach()
     {
@@ -71,16 +84,19 @@ public class InteractionMenu : MonoBehaviour
         ViewActionsButton.SetActive(false);
         HideActionsButton.SetActive(true);
         additionalActionsPannel.SetActive(true);
-        if (currentObject.type == "Item")
+        if (currentItem != null)
         {
-            action1Button.SetActive(true);
-            action2Button.SetActive(true);
-            action3Button.SetActive(false);
-            action4Button.SetActive(false);
-            action1Text.text = "Pickup";
-            action2Text.text = "Search on Market";
+            if (currentItem.item.type == "Item")
+            {
+                action1Button.SetActive(true);
+                action2Button.SetActive(true);
+                action3Button.SetActive(false);
+                action4Button.SetActive(false);
+                action1Text.text = "Pickup";
+                action2Text.text = "Search on Market";
+            }
         }
-        if (currentObject.type == "Lootable")
+        if (currentObject.object_.type == "Lootable")
         {
             action1Button.SetActive(true);
             action2Button.SetActive(false);
@@ -88,7 +104,7 @@ public class InteractionMenu : MonoBehaviour
             action4Button.SetActive(false);
             action1Text.text = "Loot";
         }
-        if (currentObject.type == "Minable")
+        if (currentObject.object_.type == "Minable")
         {
             action1Button.SetActive(true);
             action2Button.SetActive(true);
@@ -97,7 +113,7 @@ public class InteractionMenu : MonoBehaviour
             action1Text.text = "Mine";
             action2Text.text = "Search on Market";
         }
-        if (currentObject.type == "Character")
+        if (currentObject.object_.type == "Character")
         {
             action1Button.SetActive(true);
             action2Button.SetActive(true);
@@ -123,7 +139,7 @@ public class InteractionMenu : MonoBehaviour
     {
         if (action1Text.text == "Pickup")
         {
-            ItemPickup currentItem = currentObject.GetComponent<ItemPickup>();
+            ItemPickup current_Item = currentInteractable.GetComponent<ItemPickup>();
             if (currentItem != null)
             {
                 if (currentItem.canInteract)

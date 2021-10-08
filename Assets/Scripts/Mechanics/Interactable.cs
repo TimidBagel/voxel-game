@@ -6,12 +6,14 @@ public class Interactable : MonoBehaviour
 {
     InteractionMenu interactionMenu;
     Transform player;
-    public Transform interactionTransform;
+    //public Transform interactionTransform; replace regular transform.position with this
 
-    new public string name;
-    public string type;
+    public ItemPickup itemPickup;
+    public ObjectInteraction objectInteraction;
 
     bool isFocus = false;
+    bool isObject = false;
+    bool isItem = false;
     public bool canInteract = false;
 
     public float interactionRadius = 2.5f;
@@ -19,6 +21,19 @@ public class Interactable : MonoBehaviour
     {
         interactionMenu = InteractionMenu.instance;
         interactionMenu.gameObject.SetActive(false);
+
+        itemPickup = GetComponent<ItemPickup>();
+        objectInteraction = GetComponent<ObjectInteraction>();
+        if (itemPickup != null)
+        {
+            isItem = true;
+            isObject = false;
+        }
+        if (objectInteraction != null)
+        {
+            isObject = true;
+            isItem = false;
+        }
     }
     private void Update()
     {
@@ -41,7 +56,15 @@ public class Interactable : MonoBehaviour
         player = playerTransform;
 
         interactionMenu.gameObject.SetActive(true);
-        interactionMenu.SetNameAndType(this);
+
+        if (isItem)
+        {
+            interactionMenu.SetNameAndType(null, itemPickup);
+        }
+        if (isObject)
+        {
+            interactionMenu.SetNameAndType(objectInteraction, null);
+        }
         interactionMenu.HideActions();
     }
     public void OnUnFocus()
